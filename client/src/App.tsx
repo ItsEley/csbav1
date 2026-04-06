@@ -1,25 +1,63 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import { Layout } from "@/components/Layout"
 import { Hero } from "@/components/LandingHero"
 import { Services } from "@/components/Features"
+import { Affiliations } from "@/components/Affiliations" // Injecting our new network section
 import { Contact } from "@/components/Contact"
 import { Preloader } from "@/components/Preloader"
 
 export default function App() {
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // UX Fix: Prevent scrolling while the preloader is active
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    
+    // Cleanup in case the component unmounts
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isLoading])
 
   return (
     <>
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
+      {/* 1. Orchestrate the Preloader Exit */}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
       
-      {/* Content only animates in once loading is finished */}
-      <div className={`transition-all duration-1000 ${loading ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}>
-        <Layout>
-          <Hero />
-          <Services />
-          <Contact />
-        </Layout>
-      </div>
+      {/* 2. Orchestrate the Main App Entrance */}
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div
+            key="main-app"
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ 
+              duration: 1.2, 
+              ease: [0.25, 0.1, 0.25, 1], // Custom cubic-bezier for a premium "slow ease" 
+              delay: 0.1 // Slight delay to ensure preloader is fully gone
+            }}
+            className="flex flex-col min-h-screen bg-slate-950" // Ensures dark theme foundation
+          >
+            <Layout>
+              <main className="flex-grow">
+                <Hero />
+                <Services />
+                <Affiliations />
+                <Contact />
+              </main>
+            </Layout>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

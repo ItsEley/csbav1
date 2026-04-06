@@ -24,13 +24,7 @@ export function Hero() {
         
         {/* Text Content */}
         <div className="max-w-2xl w-full">
-          <Badge 
-            variant="outline" 
-            className="mb-8 px-4 py-1.5 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-slate-200 bg-white/5 border-white/20 backdrop-blur-md rounded-full inline-flex"
-          >
-            Trusted Corporate Partner
-          </Badge>
-          
+       
           {/* Scaled down heading for a more elegant, less crowded look */}
           <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold tracking-tight text-white mb-6 leading-[1.15]">
             Strategic Credit & <br className="hidden sm:block" />
@@ -52,48 +46,10 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="mt-12 lg:mt-16 flex flex-col sm:flex-row sm:items-center gap-5 text-sm font-medium text-slate-300 border-t border-white/10 pt-8 max-w-lg">
-            <div className="flex -space-x-3">
-              {[
-                "1573496359142-b8d87734a5a2", 
-                "1560250097001-be0f54cb0ebc", 
-                "1573497019940-1c28c88b4f3e"
-              ].map((id, i) => (
-                <div key={i} className="h-10 w-10 rounded-full border-2 border-slate-900 bg-slate-800 flex items-center justify-center overflow-hidden shadow-sm hover:-translate-y-1 transition-transform cursor-pointer">
-                  <img 
-                    src={`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=100&h=100&crop=faces&sat=-100`} 
-                    alt={`Corporate Professional ${i + 1}`} 
-                    className="h-full w-full object-cover" 
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </div>
-            <div>
-              <div className="flex items-center gap-2 text-white mb-0.5">
-                <ShieldCheck className="h-4 w-4 text-blue-400" />
-                <span className="font-semibold tracking-wide">Fully Compliant</span>
-              </div>
-              <span className="font-light text-xs sm:text-sm text-slate-400">With Philippine Financial Regulations</span>
-            </div>
-          </div>
+        
         </div>
 
-        {/* Floating Data Card - Positioned nicely on desktop, flows naturally on mobile */}
-        <div className="w-full sm:max-w-xs mt-8 lg:mt-0 lg:ml-auto lg:translate-y-12">
-          <div className="bg-slate-900/40 backdrop-blur-xl p-6 sm:p-8 border border-white/10 rounded-2xl shadow-2xl hover:-translate-y-1 transition-transform duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-[10px] sm:text-xs font-bold text-blue-300 uppercase tracking-widest">Asset Recovery</p>
-              <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></div>
-            </div>
-            <p className="text-4xl sm:text-5xl font-extrabold text-white mb-2 tracking-tight">98.4%</p>
-            <p className="text-sm font-medium text-emerald-300 flex items-center mt-2 bg-emerald-400/10 px-2.5 py-1 rounded-md w-fit border border-emerald-400/20">
-              +12% YoY Growth
-            </p>
-          </div>
-        </div>
+      
 
       </div>
     </section>
